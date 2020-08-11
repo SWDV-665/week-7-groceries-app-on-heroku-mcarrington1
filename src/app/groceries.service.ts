@@ -3,13 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-//import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the GroceriesServiceProvider provider.
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 
 @Injectable({
 	providedIn: 'root'
@@ -22,7 +16,7 @@ export class GroceriesService {
 
   private dataChangeSubject: Subject<boolean>;
 
-  baseURL = 'http://localhost:8080';
+  baseURL = 'https://groceries-server-mcarrington.herokuapp.com';
 
   constructor(private http: HttpClient) {
     console.log('Hello Groceries');
@@ -70,7 +64,7 @@ export class GroceriesService {
   }
   
   editItem(item, index){
-    console.log("Editing Item :: ", item)
+    console.log("Editing Item to :: ", item)
     this.http.put(this.baseURL+'/api/groceries/'+ item._id, item).subscribe(res => {
       this.items[index] = res;
       this.dataChangeSubject.next(true);
